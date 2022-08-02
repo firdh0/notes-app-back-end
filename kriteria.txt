@@ -1,0 +1,150 @@
+Struktur objek catatan:
+{
+    id: 'notes-V1StGXR8_Z5jdHi6B-myT', => harus unik maka pakai library nanoid => npm install nanoid@3.x.x agar mendukung module CommonJS
+    title: 'Sejarah JavaScript',
+    createdAt: '2020-12-23T23:00:09.686Z',
+    updatedAt: '2020-12-23T23:00:09.686Z',
+    tags: ['NodeJS', 'JavaScript'],
+    body: 'JavaScript pertama kali dikembangkan oleh Brendan Eich dari Netscape di bawah nama Mocha, yang nantinya namanya diganti menjadi LiveScript, dan akhirnya menjadi JavaScript. Navigator sebelumnya telah mendukung Java untuk lebih bisa dimanfaatkan para pemrogram yang non-Java.',
+},
+
+[ Menyimpan Catatan ]
+    - Route : /notes
+    - Method : POST
+    - Disimpan pada memory server dalam bentuk array JS
+    - Request body :
+        {
+            "title": "Judul Catatan",
+            "tags": ["Tag 1", "Tag 2"],
+            "body": "Konten catatan"
+        }
+    - Berhasil :
+        - Status code : 201
+        - Response :
+            {
+                "status": "success",
+                "message": "Catatan berhasil ditambahkan",
+                "data": {
+                    "noteId": "V09YExygSUYogwWJ" => dari properti id
+                }
+            }
+    - Gagal :
+        - Status code : 500
+        - Response :
+            {
+                "status": "error",
+                "message": "Catatan gagal untuk ditambahkan"
+            }
+
+[ Menampilkan Catatan ]
+    (Menampilkan Semua Catatan)
+    - Route : /notes
+    - Method : GET
+    - Request body : -
+    - Berhasil :
+        - Status code : 200
+        - Response :
+            {
+                "status": "success",
+                "data": {
+                    "notes": [
+                        {
+                            "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+                            "title":"Catatan 1",
+                            "createdAt":"2020-12-23T23:00:09.686Z",
+                            "updatedAt":"2020-12-23T23:00:09.686Z",
+                            "tags":[
+                                "Tag 1",
+                                "Tag 2"
+                            ],
+                            "body":"Isi dari catatan 1"
+                        },
+                        {
+                            "id":"notes-V1StGXR8_98apmLk3mm1",
+                            "title":"Catatan 2",
+                            "createdAt":"2020-12-23T23:00:09.686Z",
+                            "updatedAt":"2020-12-23T23:00:09.686Z",
+                            "tags":[
+                                "Tag 1",
+                                "Tag 2"
+                            ],
+                            "body":"Isi dari catatan 2"
+                        }
+                    ]
+                }
+            }
+    (Menampilkan Catatan Spesifik)
+    - Route : /notes/{id}
+    - Method : GET
+    - Request body : -
+    - Berhasil :
+        - Status code : 200
+        - Response :
+            {
+                "status": "success",
+                "data": {
+                    "notes": [
+                        {
+                            "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+                            "title":"Catatan 1",
+                            "createdAt":"2020-12-23T23:00:09.686Z",
+                            "updatedAt":"2020-12-23T23:00:09.686Z",
+                            "tags":[
+                                "Tag 1",
+                                "Tag 2"
+                            ],
+                            "body":"Isi dari catatan 1"
+                        },
+                    ]
+                }
+            }
+    - Gagal :
+        - Status code : 404
+        - Response :
+            {
+                "status": "fail",
+                "message": "Catatan tidak ditemukan"
+            }
+
+[ Mengubah Catatan ]
+    - Route : /notes/{id}
+    - Method : PUT
+    - Request body :
+        {
+            "title": "Judul Catatan",
+            "tags": ["Tag 1", "Tag 2"],
+            "body": "Konten catatan"
+        }
+    - Berhasil :
+        - Status code : 200
+        - Response :
+            {
+                "status": "success",
+                "message": "Catatan berhasil diperbaharui"
+            }
+    - Gagal :
+        - Status code : 404
+        - Response :
+            {
+                "status": "fail",
+                "message": "Gagal memperbarui catatan. Id catatan tidak ditemukan"
+            }
+
+[ Menghapus Catatan ]
+    - Route : /notes/{id}
+    - Method : DELETE
+    - Request body : -
+    - Berhasil :
+        - Status code : 200
+        - Response :
+            {
+                "status": "success",
+                "message": "Catatan berhasil dihapus"
+            }
+    - Gagal :
+        - Status code : 404
+        - Response :
+            {
+                "status": "fail",
+                "message": "Catatan gagal dihapus. Id catatan tidak ditemukan"
+            }
