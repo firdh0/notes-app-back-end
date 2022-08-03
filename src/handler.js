@@ -52,7 +52,7 @@ const getNoteByIdHandler = (request, h) => {
 
     if( note !== undefined ){
         return{ // sama saja seperti di baris 21-29 hanya saja dipersingkat tidak pakai h.response()
-            status: 'succes',
+            status: 'success',
             data: {
                 note
             }
@@ -111,7 +111,7 @@ const deleteNoteByIdHandler = (request, h) => {
     if( index !== -1 ){
         notes.splice(index, 1);
         const response =  h.response({
-            status: 'succes',
+            status: 'success',
             message: 'Catatan berhasil dihapus'
         });
         response.code(200);
